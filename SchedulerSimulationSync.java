@@ -83,7 +83,11 @@ lock.unlock ();
     public static void logExecution(String message) {
         // TODO: Protect this critical section with a lock
         // RACE CONDITION: ArrayList is not thread-safe!
-        executionLog.add(message);
+        elock.lock() ;
+       try{
+      executionLog.add (message);
+       }finally {
+        lock. unlock();
     }
 }
 
