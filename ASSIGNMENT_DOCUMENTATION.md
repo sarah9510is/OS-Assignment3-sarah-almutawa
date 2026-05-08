@@ -1,8 +1,8 @@
 # Assignment 3 - Complete Documentation
 
-**Student Name**: [Your Full Name]  
-**Student ID**: [Your ID]  
-**Date Submitted**: [Submission Date]
+**Student Name**: [sarah abdullah almotawa]  
+**Student ID**: [445052089]  
+**Date Submitted**: [5/8/2026]
 
 ---
 
@@ -31,68 +31,68 @@
 
 Document your development process with **minimum 3 entries** showing progression:
 
-### Entry 1 - [Date, Time]
-**What I implemented**: 
+### Entry 1 - [April 30, 2026 – 4:30 PM]
+**What I implemented**: I thoroughly examined the scheduler simulation that was supplied and noted every shared resource that was used by several threads. I examined where race situations might arise and how concurrent processes operate.
 
-**Challenges encountered**: 
+**Challenges encountered**: recognizing risky activities and comprehending how threads interact with shared variables.
 
-**How I solved it**: 
+**How I solved it**: examined the class notes and contrasted synchronization instances with the code.
 
-**Testing approach**: 
+**Testing approach**: To see behavior and output consistency, the application was run multiple times.
 
-**Time spent**: 
-
----
-
-### Entry 2 - [Date, Time]
-**What I implemented**: 
-
-**Challenges encountered**: 
-
-**How I solved it**: 
-
-**Testing approach**: 
-
-**Time spent**: 
+**Time spent**: 1 hour
 
 ---
 
-### Entry 3 - [Date, Time]
-**What I implemented**: 
+### Entry 2 - [April 30, 2026 – 5:30 PM]
+**What I implemented**: ReentrantLock was put into place, protecting shared counters and waiting time computations.
 
-**Challenges encountered**: 
+**Challenges encountered**: Ensuring locks are always released safely to avoid deadlocks.
 
-**How I solved it**: 
+**How I solved it**: Used try–finally blocks in all critical sections.
 
-**Testing approach**: 
+**Testing approach**: Tested program repeatedly and confirmed no runtime errors.
 
-**Time spent**: 
-
----
-
-### Entry 4 - [Date, Time]
-**What I implemented**: 
-
-**Challenges encountered**: 
-
-**How I solved it**: 
-
-**Testing approach**: 
-
-**Time spent**: 
+**Time spent**: 2hours
 
 ---
 
-### Entry 5 - [Date, Time]
-**What I implemented**: 
+### Entry 3 - [May 1, 2026 – 2:00 PM]
+**What I implemented**: Protected the executionLog ArrayList using locks.
 
-**Challenges encountered**: 
+**Challenges encountered**: Understanding why ArrayList is not thread-safe.
 
-**How I solved it**: 
+**How I solved it**: Researched ConcurrentModificationException and thread safety.
 
-**Testing approach**: 
+**Testing approach**: Ran program multiple times to confirm stability.
 
-**Time spent**: 
+**Time spent**: 1hour
+
+---
+
+### Entry 4 - [May 1, 2026 – 3:00 PM]
+**What I implemented**: Implemented CPU semaphore to simulate single CPU access.
+
+**Challenges encountered**: Understanding difference between lock and semaphore.
+
+**How I solved it**: Applied acquire/release inside try–finally blocks.
+
+**Testing approach**: Verified processes execute sequentially.
+
+**Time spent**: 2hour
+
+---
+
+### Entry 5 - [May 2, 2026 – 8:00 PM]
+**What I implemented**: Final testing, statistics verification, and documentation writing.
+
+**Challenges encountered**: Ensuring consistent results across multiple runs.
+
+**How I solved it**: Performed repeated testing and verified output correctness.
+
+**Testing approach**: Executed program 5+ times.
+
+**Time spent**: 1.5hours
 
 ---
 
@@ -105,9 +105,12 @@ Document your development process with **minimum 3 entries** showing progression
 - What incorrect behavior could occur?
 
 **Your Answer**:
+The original code contained two race conditions:
 
-[Your answer here - 4-6 sentences with code examples]
+Multiple threads may update shared counters like contextSwitchCount and totalWaitingTime at the same time, resulting in missed updates and inaccurate data.
+A ConcurrentModificationException or damaged data could result from multiple threads accessing the executionLog ArrayList concurrently.
 
+In the absence of synchronization, threads might read and write shared variables simultaneously, leading to unexpected outcomes.
 ---
 
 ### Question 2: Locks vs Semaphores

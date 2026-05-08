@@ -70,6 +70,7 @@ lock. unlock ();
     
     // Method to add waiting time
     public static void addWaitingTime(long time) {
+        ReentrantLock ock;
         // TODO: Protect this critical section with a lock
         ock. lock();
 try{
@@ -228,7 +229,7 @@ class Process implements Runnable {
     finally {
         SharedResources.cpuSemaphore.release();
     }
-    
+}
     
     public String getName() {
         return name;
