@@ -118,16 +118,27 @@ In the absence of synchronization, threads might read and write shared variables
 
 **Your Answer**:
 
-[Your answer here - explain your implementation choices]
+ReentrantLock provides mutual exclusion for critical sections, ensuring only one thread modifies shared data at a time.
+Semaphore controls access to a limited resource.
 
+In my implementation:
+
+ReentrantLock was used to protect shared counters and executionLog.
+Semaphore(1) was used to simulate a single CPU core, ensuring only one process executes at a time.
 ---
 
 ### Question 3: Deadlock Prevention
 **Q**: What is deadlock? Explain TWO prevention techniques and what you did to prevent deadlocks in your code.
 
 **Your Answer**:
+Deadlock occurs when threads wait forever for resources held by each other.
 
-[Your answer here - reference try-finally blocks, lock ordering, etc.]
+Prevention techniques used:
+
+Using a single global lock.
+Always releasing locks using try–finally.
+
+This guarantees resources are always released
 
 ---
 
@@ -139,8 +150,17 @@ In the absence of synchronization, threads might read and write shared variables
 - Given that the three counters are independent, which approach provides better concurrency and why?
 
 **Your Answer**:
+I used one global lock (coarse-grained locking).
 
-[Your answer here - explain coarse-grained vs fine-grained locking, independence of counters, concurrency implications. Show understanding of when to use each approach. 5-8 sentences expected.]
+Reason:
+The operations are very short and simple. Using multiple locks would add unnecessary complexity.
+
+Trade-offs:
+
+Coarse-grained: simpler but less concurrency.
+Fine-grained: more concurrency but complex and error-prone.
+
+Given the small workload, coarse-grained locking is appropriate and safer.
 
 ---
 
