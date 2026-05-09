@@ -280,11 +280,11 @@ Multiple processes executing simultaneously (unrealistic CPU behavior).
 ### Test 2: Exception Testing
 **What I tested**: Checking for ConcurrentModificationException
 
-**Testing procedure**: 
+**Testing procedure**: The program was executed multiple times while many threads were writing to executionLog
 
-**Results**: 
+**Results**: No exceptions occurred during any run.
 
-**What this proves**: 
+**What this proves**: The ReentrantLock successfully protected the shared ArrayList.
 
 ---
 
@@ -292,28 +292,32 @@ Multiple processes executing simultaneously (unrealistic CPU behavior).
 **What I tested**: Verifying correct final values (total burst time, context switches, etc.)
 
 **Expected values**: 
+Number of completed processes equals total processes.
+Waiting time is positive and reasonable.
+Execution log contains multiple entries.
 
 **Actual values**: 
+All statistics were printed correctly at the end of execution.
 
-**Analysis**: 
+**Analysis**: This confirms correct synchronization and scheduler behavior.
 
 ---
 
 ### Test 4: Different Scenarios
-**Scenario tested**: [e.g., different time quantum, more processes, etc.]
+**Scenario tested**: Running the scheduler multiple times with different randomly generated processes.
 
-**Purpose**: 
+**Purpose**: To verify scheduler stability under varying workloads.
 
-**Results**: 
+**Results**: Scheduler worked correctly in all scenarios.
 
-**What I learned**: 
+**What I learned**: Synchronization guarantees reliability regardless of workload size or timing.
 
 ---
 
 ## Part 5: Reflection and Learning
 
 ### What I learned about synchronization:
-
+I learned how race conditions occur in multithreaded systems and how to prevent them using locks and semaphores. I also learned how to avoid deadlocks and ensure thread-safe programming.
 [6-8 sentences about key concepts, challenges, insights]
 
 ---
@@ -322,21 +326,33 @@ Multiple processes executing simultaneously (unrealistic CPU behavior).
 
 Give TWO examples where synchronization is critical:
 
-**Example 1**: 
+**Example 1**: Banking transactions
 
-**Example 2**: 
+**Example 2**: Operating system process scheduling
 
 ---
 
 ### How I would explain synchronization to others:
 
 [Explain to someone who just finished Assignment 1 - use simple terms and analogies]
+If I had to explain synchronization to someone who just finished Assignment 1, I would use a simple real-life analogy.
+
+Imagine a single bathroom in a house shared by many people. If everyone tries to enter at the same time, chaos happens. Synchronization is like putting a lock on the door so only one person can use it at a time.
+
+In this assignment:
+
+The CPU is the bathroom.
+The processes are the people.
+The Semaphore is the key to the bathroom.
+The ReentrantLock is the lock protecting shared notebooks (shared data).
+
+Without synchronization, everyone would try to write in the notebook at the same time and the notes would become messy and incorrect. Synchronization ensures that threads take turns safely and the final results remain correct.
 
 ---
 
 ## Part 6: GitHub Repository Information
 
-**Repository URL**: 
+**Repository URL**: https://github.com/sarah9510is/OS-Assignment3-sarah-almutawa.git
 
 **Number of commits**: 
 
