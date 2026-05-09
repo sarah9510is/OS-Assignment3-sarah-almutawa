@@ -168,18 +168,24 @@ Given the small workload, coarse-grained locking is appropriate and safer.
 
 ### Critical Section #1: Counter Variables
 
-**Which variables**: 
+**Which variables**: contextSwitchCount, completedProcessCount, totalWaitingTime
 
-**Why they need protection**: 
+**Why they need protection**: Shared between threads
 
-**Synchronization mechanism used**: 
+**Synchronization mechanism used**: ReentrantLock
 
 **Code snippet**:
+lock.lock();
+try {
+    contextSwitchCount++;
+} finally {
+    lock.unlock();
+}
 ```java
 // Paste your implementation here
 ```
 
-**Justification**: 
+**Justification**:Prevent lost updates 
 
 ---
 
