@@ -191,30 +191,53 @@ try {
 
 ### Critical Section #2: Execution Log
 
-**What resource**: 
+**What resource**: The shared resource is the executionLog which is an ArrayList<String> used by all threads to store execution messages.
 
-**Why it needs protection**: 
+**Why it needs protection**: ArrayList is not thread-safe. If multiple threads attempt to add elements simultaneously:
+The internal array may resize concurrently.
+Data may become corrupted.
+A ConcurrentModificationException may occur.
 
-**Synchronization mechanism used**: 
+**Synchronization mechanism used**: ReentrantLock was used to guarantee mutual exclusion when modifying the list.
 
 **Code snippet**:
+public static void logExecution(String message) {
+    lock.lock();
+    try {
+        executionLog.add(message);
+    } finally {
+        lock.unlock();
+    }
+}
 ```java
 // Paste your implementation here
 ```
 
-**Justification**: 
+**Justification**: Using a lock ensures that only one thread can modify the list at a time, preventing data corruption and runtime exceptions.
 
 ---
 
 ### Critical Section #3: CPU Semaphore
 
-**Purpose of semaphore**: 
+**Purpose of semaphore**: To simulate a single CPU core.
+In real operating systems, only one process can execute on a CPU core at a time.
 
-**Number of permits and why**: 
+**Number of permits and why**: Semaphore(1) → binary semaphore
+This guarantees only one process executes at a time.
 
 **Where implemented**: 
+Inside:
+
+run() method
+runToCompletion() method
 
 **Code snippet**:
+SharedResources.cpuSemaphore.acquire();
+try {
+    // process execution
+} finally {
+    SharedResources.cpuSemaphore.release();
+}
 ```java
 // Paste your implementation here
 ```
@@ -229,17 +252,28 @@ try {
 **What I tested**: Running program multiple times to verify consistent results
 
 **Testing procedure**: 
+javac SchedulerSimulationSync.java
+java SchedulerSimulationSync
 ```bash
 # Commands used (run the program at least 5 times)
 ```
 
 **Results**: 
+Every run completed successfully.
+All processes finished execution and statistics were printed correctly each time.
+
 (Show that running multiple times produces consistent, correct results)
 
 **Why synchronization is necessary**: 
 (Explain what race conditions COULD occur without synchronization, even if you didn't observe them. Explain which shared resources need protection and why.)
+Without synchronization, the following race conditions could occur:
 
-**Conclusion**: 
+Incorrect context switch count due to lost updates.
+Incorrect waiting time accumulation.
+Corrupted execution log due to concurrent ArrayList access.
+Multiple processes executing simultaneously (unrealistic CPU behavior).
+
+**Conclusion**: Synchronization ensures consistent and correct results across all executions.
 
 ---
 
